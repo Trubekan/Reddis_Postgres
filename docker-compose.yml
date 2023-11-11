@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./Api
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      - react
+
+  react:
+    build:
+      context: ./react
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+
+  node:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    ports:
+      - "4000:80"
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
